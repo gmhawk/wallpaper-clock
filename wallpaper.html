@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Wallpaper</title>
+    <link href="https://fonts.googleapis.com/css?family=K2D" rel="stylesheet">
+    <style media="screen">
+      body {
+        background: url(https://i.imgur.com/FefXj88.png);
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        background-color: black;
+        background-position: center top;
+        height: 100%;
+      }
+      #clock{
+        position: absolute;
+        font-size: 4vh;
+        color: red;
+        left: 5%;
+        bottom: 5%;
+        font-family: 'K2D', sans-serif;
+      }
+    </style>
+  </head>
+  <body onload="startTime()">
+    <script>
+      function startTime() {
+      let today = new Date();
+      let hour = today.getHours();
+      let minute = today.getMinutes();
+      let second = today.getSeconds();
+      let year = today.getFullYear();
+      let month = today.getMonth();
+      let date = today.getDate();
+      let day = today.getDay();
+      let suffix = (hour >= 12)? 'PM' : 'AM';
+      const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      hour = checkHour(hour);
+      minute = checkTime(minute);
+      second = checkTime(second);
+      month = months[month];
+      day = days[day];
+      document.getElementById('clock').innerHTML =
+      `${hour}:${minute}:${second} ${suffix}
+      <br />
+      ${day}, ${month} ${date}, ${year}
+      `;
+      let t = setTimeout(startTime, 500);
+      }
+      function checkTime(time) {
+          if (time < 10) {time = "0" + time};  // add zero in front of numbers < 10
+          return time;
+      }
+      function checkHour(hour) {
+        if (hour > 12) {
+          hour = hour - 12;
+          return hour;
+        } else if (hour === '00') {
+          hour = 12;
+          return hour;
+        }
+      }
+    </script>
+    <div id='clock'></div>
+  </body>
+</html>
